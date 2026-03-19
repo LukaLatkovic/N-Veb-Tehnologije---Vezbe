@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Jednostavna HTML stranica koja prikazuje naučni članak sa logičkom strukturom dokumenta, semantičkim elementima i navigacijom unutar dokumenta." />
+  <meta name="keywords" content="HTML, naučni članak, semantički elementi, sekcije, navigacija, uvod, metodologija, rezultati, diskusija, zaključak" />
+  <meta name="author" content="Luka Latković" />
+  <title>Naučni članak - Primer HTML stranice</title>
+
+ 
+</head>
+<body>
+
+  <header>
+    <h1>Primena semantičkog HTML-a u prikazu naučnog članka</h1>
+    <p class="meta"><strong>Autor:</strong> Luka Latković</p>
+    <p class="meta"><strong>Oblast:</strong> Napredne web tehnologije - izabrana poglavlja</p>
+
+    <nav aria-label="Navigacija kroz članak">
+      <h2>Sadržaj</h2>
+      <ul>
+        <li><a href="#uvod">Uvod</a></li>
+        <li><a href="#metodologija">Metodologija</a></li>
+        <li><a href="#rezultati">Rezultati</a></li>
+        <li><a href="#diskusija">Diskusija</a></li>
+        <li><a href="#zakljucak">Zaključak</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <section id="uvod">
+        <h2>1. Uvod</h2>
+        <p>
+          Semantički HTML omogućava jasnu organizaciju sadržaja i poboljšava pristupačnost, SEO optimizaciju i razumljivost dokumenta.
+          U okviru naučnih članaka, korišćenje elemenata kao što su <code>header</code>, <code>nav</code>, <code>article</code> i <code>section</code>
+          doprinosi logičnoj i preglednoj strukturi stranice.
+        </p>
+      </section>
+
+      <section id="metodologija">
+        <h2>2. Metodologija</h2>
+        <p>
+          U izradi ove stranice korišćeni su osnovni HTML5 semantički elementi. Dokument sadrži kompletno zaglavlje sa meta opisom i ključnim rečima,
+          kao i navigaciju unutar stranice pomoću sidra. Sadržaj članka organizovan je kroz više jasno definisanih sekcija.
+        </p>
+
+        <h3>2.1 Korišćeni elementi</h3>
+        <p>
+          Korišćeni su sledeći semantički elementi: <strong><code>header</code>, <code>nav</code>, <code>main</code>, <code>article</code>,
+          <code>section</code> i <code>footer</code></strong>.
+        </p>
+      </section>
+
+      <section id="rezultati">
+        <h2>3. Rezultati</h2>
+        <p>
+          Dobijena je jednostavna i pregledna HTML stranica koja prikazuje naučni članak sa pravilnom hijerarhijom naslova i unutrašnjom navigacijom.
+          Takva struktura omogućava korisnicima lakše snalaženje i bolje razumevanje sadržaja.
+        </p>
+      </section>
+
+      <section id="diskusija">
+        <h2>4. Diskusija</h2>
+        <p>
+          Pravilna upotreba semantičkih HTML elemenata ne poboljšava samo vizuelnu organizaciju dokumenta, već i njegovu mašinsku obradu.
+          Pregledači, čitači ekrana i pretraživači lakše tumače ovako organizovan sadržaj, što direktno utiče na kvalitet i pristupačnost stranice.
+        </p>
+      </section>
+
+      <section id="zakljucak">
+        <h2>5. Zaključak</h2>
+        <p>
+          Semantički <em>HTML</em> predstavlja važan deo modernog web razvoja. Kroz ovu stranicu prikazan je jednostavan primer naučnog članka
+          sa jasno organizovanim sekcijama, odgovarajućim naslovima i navigacijom unutar dokumenta.
+        </p>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Naučni članak u HTML formatu. luka29924@its.edu.rs</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="sr-Latn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grupisanje sadržaja u HTML-u</title>
+
+<style>
+.highlight{
+    color:#c0392b;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div>
+        <h1>Primer grupisanja sadržaja u HTML-u</h1>
+        <p>Demonstracija upotrebe <span class="highlight">div</span> i <span class="highlight">span</span> elemenata.</p>
+    </div>
+
+    <div class="section">
+        <h2>Grupisanje blokova sadržaja</h2>
+        <p>
+            Element <span class="highlight">&lt;div&gt;</span> koristi se kao kontejner za
+            organizovanje različitih delova stranice. Na primer, možemo imati posebne
+            blokove za zaglavlje, sadržaj i podnožje stranice.
+        </p>
+
+        <div class="note">
+            Ovaj blok je takođe napravljen pomoću <span class="highlight">div</span> elementa
+            kako bi se izdvojila dodatna informacija.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Grupisanje linijskih elemenata</h2>
+        <p>
+            Element <span class="highlight">&lt;span&gt;</span> koristi se za označavanje
+            određenih delova teksta koji kasnije mogu biti stilizovani pomoću CSS-a.
+        </p>
+
+        <p>
+            Na primer: HTML je <span class="highlight">jezik za označavanje</span>,
+            dok je CSS <span class="highlight">jezik za stilizovanje</span> web stranica.
+        </p>
+    </div>
+
+    <!-- Podnožje -->
+    <div class="footer">
+        <p>Primer HTML stranice – grupisanje sadržaja pomoću div i span elemenata.</p>
+    </div>
+
+</div>
+
+</body>
+</html>
