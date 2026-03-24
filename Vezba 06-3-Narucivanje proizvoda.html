@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Luka Latković">
+    <title>Naručivanje proizvoda</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        fieldset {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #444;
+            padding: 0 10px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+
+        .radio-group input {
+            width: auto;
+            padding: 0;
+            margin: 0;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button[type="submit"] {
+            background: #3498db;
+            color: white;
+        }
+
+        button[type="submit"]:hover {
+            background: #2980b9;
+        }
+
+        button[type="reset"] {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        button[type="reset"]:hover {
+            background: #cfcfcf;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Porudžbina proizvoda</h1>
+
+        <form action="#" method="post">
+
+            <fieldset>
+                <legend>Lični podaci</legend>
+
+                <div class="form-group">
+                    <label for="ime">Ime</label>
+                    <input type="text" id="ime" name="ime" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="adresa">Adresa</label>
+                    <input type="text" id="adresa" name="adresa" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-pošta</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefon">Broj telefona</label>
+                    <input type="tel" id="telefon" name="telefon" required>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Podaci o narudžbini</legend>
+
+                <div class="form-group">
+                    <label for="proizvod">Izbor proizvoda</label>
+                    <select id="proizvod" name="proizvod" required>
+                        <option value="">-- Izaberite proizvod --</option>
+                        <option value="laptop">Laptop</option>
+                        <option value="telefon">Telefon</option>
+                        <option value="slusalice">Slušalice</option>
+                        <option value="monitor">Monitor</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="kolicina">Količina</label>
+                    <input type="number" id="kolicina" name="kolicina" min="1" max="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="datum-isporuke">Datum isporuke</label>
+                    <input type="date" id="datum-isporuke" name="datum-isporuke">
+                </div>
+
+                <div class="form-group">
+                    <label>Način plaćanja</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="placanje" value="kartica" required> Kartica</label>
+                        <label><input type="radio" name="placanje" value="pouzece"> Pouzećem</label>
+                        <label><input type="radio" name="placanje" value="uplata"> Uplata na račun</label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="buttons">
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+
+</html>
