@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Luka Latkovic">
+    <title>Vezba 08-5 - Prikazivanje poruke</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #1e293b;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input {
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 12px 18px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        #poruka {
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .poruka-uspeh {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .poruka-greska {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Prikazivanje poruke</h1>
+
+        <form id="forma">
+            <input type="text" id="ime" placeholder="Unesite ime">
+            <input type="email" id="email" placeholder="Unesite e-postu">
+            <button type="submit">Posalji</button>
+        </form>
+
+        <p id="poruka"></p>
+    </div>
+
+    <script>
+        const forma = document.getElementById("forma");
+        const ime = document.getElementById("ime");
+        const email = document.getElementById("email");
+        const poruka = document.getElementById("poruka");
+
+        forma.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const vrednostImena = ime.value.trim();
+            const vrednostEmaila = email.value.trim();
+
+            if (vrednostImena === "" || vrednostEmaila === "") {
+                poruka.textContent = "Sva polja moraju biti popunjena.";
+                poruka.className = "poruka-greska";
+                poruka.style.display = "block";
+
+                setTimeout(() => {
+                    poruka.style.display = "none";
+                }, 3000);
+
+                return;
+            }
+
+            poruka.textContent = "Mejl je uspesno poslat.";
+            poruka.className = "poruka-uspeh";
+            poruka.style.display = "block";
+
+            forma.reset();
+
+            setTimeout(() => {
+                poruka.style.display = "none";
+            }, 3000);
+        });
+    </script>
+
+</body>
+
+</html>

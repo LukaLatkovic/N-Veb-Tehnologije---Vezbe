@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Luka Latkovic">
+    <title>DOM dodavanje elemenata</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 60px;
+            background-color: #f1f5f9;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        li {
+            background: white;
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Dodavanje elemenata u listu</h1>
+
+    <button id="dugme">Dodaj stavku</button>
+
+    <ul id="lista"></ul>
+
+    <script>
+        const dugme = document.getElementById("dugme");
+        const lista = document.getElementById("lista");
+
+        let brojac = 1;
+
+        dugme.addEventListener("click", () => {
+            const novaStavka = document.createElement("li");
+
+            novaStavka.textContent = "Stavka broj " + brojac;
+
+            lista.appendChild(novaStavka);
+
+            brojac++;
+
+        });
+    </script>
+
+</body>
+
+</html>

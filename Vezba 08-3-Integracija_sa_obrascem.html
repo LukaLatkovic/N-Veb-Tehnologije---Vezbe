@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Luka Latkovic">
+    <title>Vezba 08-3 - Interakcija sa obrascem</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #1e293b;
+        }
+
+        input {
+            width: 70%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 12px 18px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 25px;
+        }
+
+        li {
+            background-color: #e2e8f0;
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Dodavanje stavki u listu</h1>
+
+        <input type="text" id="unos" placeholder="Unesite novu stavku">
+        <button id="dugmeDodaj">Dodaj</button>
+
+        <ul id="lista"></ul>
+    </div>
+
+    <script>
+        const unos = document.getElementById("unos");
+        const dugmeDodaj = document.getElementById("dugmeDodaj");
+        const lista = document.getElementById("lista");
+
+        dugmeDodaj.addEventListener("click", () => {
+            const tekst = unos.value.trim();
+
+            if (tekst !== "") {
+                const novaStavka = document.createElement("li");
+                novaStavka.textContent = tekst;
+                lista.appendChild(novaStavka);
+
+                unos.value = "";
+                unos.focus();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

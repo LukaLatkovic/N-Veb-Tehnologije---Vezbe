@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Luka Latkovic">
+    <title>DOM uklanjanje elemenata</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 60px;
+            background-color: #f1f5f9;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        li {
+            background: white;
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            background-color: #ef4444;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #dc2626;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Uklanjanje elemenata</h1>
+
+    <ul id="lista">
+        <li>Stavka 1 <button>Ukloni</button></li>
+        <li>Stavka 2 <button>Ukloni</button></li>
+        <li>Stavka 3 <button>Ukloni</button></li>
+    </ul>
+
+    <script>
+        const lista = document.getElementById("lista");
+
+        lista.addEventListener("click", (e) => {
+
+            if (e.target.tagName === "BUTTON") {
+
+                const li = e.target.parentElement;
+
+                lista.removeChild(li);
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>

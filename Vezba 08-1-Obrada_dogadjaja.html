@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Luka Latkovic">
+    <title>Vezba 08-1 - Obrada dogadjaja</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 60px 20px;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 22px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2563eb;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .tamna-tema {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Promena teme stranice</h1>
+    <button id="dugmeTema">Promeni temu</button>
+    <p id="status">Trenutna tema: svetla</p>
+
+    <script>
+        const dugmeTema = document.getElementById("dugmeTema");
+        const status = document.getElementById("status");
+        const teloStranice = document.body;
+
+        dugmeTema.addEventListener("click", () => {
+            teloStranice.classList.toggle("tamna-tema");
+
+            if (teloStranice.classList.contains("tamna-tema")) {
+                status.textContent = "Trenutna tema: tamna";
+            } else {
+                status.textContent = "Trenutna tema: svetla";
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Luka Latkovic">
+    <title>Vezba 08-2 - Delegiranje dogadjaja</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            color: #1e293b;
+        }
+
+        #kontejner {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .stavka {
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .stavka:hover {
+            background-color: #cbd5e1;
+        }
+
+        #status {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #0f172a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Delegiranje dogadjaja</h1>
+
+    <div id="kontejner">
+        <div class="stavka">Stavka 1</div>
+        <div class="stavka">Stavka 2</div>
+        <div class="stavka">Stavka 3</div>
+    </div>
+
+    <p id="status">Kliknite na neku stavku.</p>
+
+    <script>
+        const kontejner = document.getElementById("kontejner");
+        const status = document.getElementById("status");
+
+        kontejner.addEventListener("click", (e) => {
+            if (e.target.classList.contains("stavka")) {
+                status.textContent = "Kliknuli ste na: " + e.target.textContent;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
