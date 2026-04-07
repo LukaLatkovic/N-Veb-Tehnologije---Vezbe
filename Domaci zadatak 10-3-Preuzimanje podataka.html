@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Luka Latkovic">
+    <title>Domaci 10-3 - Preuzimanje podataka</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 40px 20px;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .opis {
+            text-align: center;
+            color: #475569;
+            margin-bottom: 30px;
+        }
+
+        .actions {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            background-color: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        #status {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            min-height: 24px;
+        }
+
+        #listaKorisnika {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        #listaKorisnika li {
+            background-color: white;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        #listaKorisnika h2 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        #listaKorisnika p {
+            margin: 8px 0;
+            color: #475569;
+        }
+
+        .greska {
+            color: #b91c1c;
+        }
+
+        .uspeh {
+            color: #166534;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Lista korisnika sa javnog API-ja</h1>
+        <p class="opis">Kliknite na dugme da preuzmete podatke sa servera i prikazete ih u DOM-u.</p>
+
+        <div class="actions">
+            <button id="dugmeUcitaj">Ucitaj korisnike</button>
+        </div>
+
+        <p id="status"></p>
+        <ul id="listaKorisnika"></ul>
+    </div>
+
+    <script>
+        const dugmeUcitaj = document.getElementById("dugmeUcitaj");
+        const listaKorisnika = document.getElementById("listaKorisnika");
+        const status = document.getElementById("status");
+
+        dugmeUcitaj.addEventListener("click", () => {
+            listaKorisnika.innerHTML = "";
+            status.textContent = "Ucitavanje podataka...";
+            status.className = "";
+
+            fetch("https://jsonplaceholder.typicode.com/users")
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Greska pri ucitavanju podataka sa servera.");
+                    }
+
+                    return response.json();
+                })
+                .then((korisnici) => {
+                    status.textContent = "Podaci su uspesno ucitani.";
+                    status.className = "uspeh";
+
+                    korisnici.forEach((korisnik) => {
+                        const stavka = document.createElement("li");
+
+                        stavka.innerHTML = `
+                            <h2>${korisnik.name}</h2>
+                            <p><strong>Korisnicko ime:</strong> ${korisnik.username}</p>
+                            <p><strong>E-posta:</strong> ${korisnik.email}</p>
+                            <p><strong>Telefon:</strong> ${korisnik.phone}</p>
+                            <p><strong>Grad:</strong> ${korisnik.address.city}</p>
+                            <p><strong>Kompanija:</strong> ${korisnik.company.name}</p>
+                        `;
+
+                        listaKorisnika.appendChild(stavka);
+                    });
+                })
+                .catch((error) => {
+                    status.textContent = "Doslo je do greske: " + error.message;
+                    status.className = "greska";
+                });
+        });
+    </script>
+
+</body>
+
+</html>

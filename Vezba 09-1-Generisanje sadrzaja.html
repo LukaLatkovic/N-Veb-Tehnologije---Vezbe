@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Luka Latkovic">
+    <title>Vezba 09-1 - Generisanje sadrzaja</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1e293b;
+        }
+
+        #proizvodi-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .kartica {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .kartica:hover {
+            transform: translateY(-4px);
+        }
+
+        .kartica h2 {
+            margin-top: 0;
+            color: #0f172a;
+            font-size: 22px;
+        }
+
+        .cena {
+            font-weight: bold;
+            color: #2563eb;
+            margin: 10px 0;
+        }
+
+        .opis {
+            color: #475569;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Lista proizvoda</h1>
+
+    <div id="proizvodi-container"></div>
+
+    <script>
+        const proizvodi = [
+            {
+                naziv: "Laptop",
+                cena: "85000 RSD",
+                opis: "Moderan laptop za posao, ucenje i svakodnevnu upotrebu."
+            },
+            {
+                naziv: "Mis",
+                cena: "2500 RSD",
+                opis: "Bezicni mis ergonomskog dizajna sa preciznim senzorom."
+            },
+            {
+                naziv: "Tastatura",
+                cena: "4500 RSD",
+                opis: "Mehanicka tastatura sa osvetljenjem i odlicnim odzivom."
+            },
+            {
+                naziv: "Monitor",
+                cena: "22000 RSD",
+                opis: "Full HD monitor od 24 inca pogodan za rad i zabavu."
+            }
+        ];
+
+        const container = document.getElementById("proizvodi-container");
+
+        proizvodi.forEach((proizvod) => {
+            const kartica = document.createElement("div");
+            kartica.classList.add("kartica");
+
+            kartica.innerHTML = `
+                <h2>${proizvod.naziv}</h2>
+                <p class="cena">Cena: ${proizvod.cena}</p>
+                <p class="opis">${proizvod.opis}</p>
+            `;
+
+            container.appendChild(kartica);
+        });
+    </script>
+
+</body>
+
+</html>

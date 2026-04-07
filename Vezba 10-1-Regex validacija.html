@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Luka Latkovic">
+    <title>Vezba 10-1 - Regex validacija</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #cbd5e1;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        input.valid {
+            border-color: #22c55e;
+            background-color: #dcfce7;
+        }
+
+        input.invalid {
+            border-color: #ef4444;
+            background-color: #fee2e2;
+        }
+
+        #poruka {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .ok {
+            color: #15803d;
+        }
+
+        .error {
+            color: #b91c1c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Unos JMBG</h1>
+
+        <input type="text" id="jmbg" placeholder="Unesite JMBG (13 cifara)">
+        <p id="poruka"></p>
+    </div>
+
+    <script>
+        const input = document.getElementById("jmbg");
+        const poruka = document.getElementById("poruka");
+
+        const regex = /^\d{13}$/;
+
+        input.addEventListener("input", () => {
+            const vrednost = input.value.trim();
+
+            if (regex.test(vrednost)) {
+                input.classList.add("valid");
+                input.classList.remove("invalid");
+
+                poruka.textContent = "JMBG je ispravan.";
+                poruka.classList.add("ok");
+                poruka.classList.remove("error");
+
+            } else {
+                input.classList.add("invalid");
+                input.classList.remove("valid");
+
+                poruka.textContent = "JMBG mora imati tacno 13 cifara.";
+                poruka.classList.add("error");
+                poruka.classList.remove("ok");
+            }
+        });
+    </script>
+
+</body>
+
+</html>

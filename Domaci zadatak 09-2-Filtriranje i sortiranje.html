@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Luka Latkovic">
+    <meta name="description" content="Domaci zadatak 09-2 - filtriranje i sortiranje proizvoda">
+    <title>Domaci 09-2 - Filtriranje i sortiranje</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .opis-stranice {
+            text-align: center;
+            color: #475569;
+            margin-bottom: 30px;
+        }
+
+        .kontrole {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        .kontrole input,
+        .kontrole select {
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 16px;
+            min-width: 260px;
+        }
+
+        .info {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        #listaProizvoda {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .kartica {
+            background-color: white;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease;
+        }
+
+        .kartica:hover {
+            transform: translateY(-4px);
+        }
+
+        .kategorija {
+            display: inline-block;
+            font-size: 13px;
+            background-color: #dbeafe;
+            color: #1d4ed8;
+            padding: 6px 10px;
+            border-radius: 999px;
+            margin-bottom: 12px;
+        }
+
+        .kartica h2 {
+            margin: 0 0 10px 0;
+            font-size: 22px;
+        }
+
+        .cena {
+            font-size: 20px;
+            font-weight: bold;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .opis {
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        .nema-rezultata {
+            text-align: center;
+            background-color: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>Oprema za idealan desk setup</h1>
+        <p class="opis-stranice">
+            Pretrazite i sortirajte proizvode za rad od kuce, produktivnost i gejming.
+        </p>
+
+        <div class="kontrole">
+            <input type="text" id="pretraga" placeholder="Pretrazi po nazivu ili opisu proizvoda">
+
+            <select id="sortiranje">
+                <option value="podrazumevano">Sortiraj po: podrazumevano</option>
+                <option value="cena-rastuce">Cena: od nize ka visoj</option>
+                <option value="cena-opadajuce">Cena: od vise ka nizoj</option>
+            </select>
+        </div>
+
+        <p class="info" id="infoRezultat"></p>
+
+        <div id="listaProizvoda"></div>
+    </div>
+
+    <script>
+        const proizvodi = [
+            {
+                naziv: "Ergonomska stolica FlexPro",
+                cena: 28990,
+                kategorija: "Stolica",
+                opis: "Podesiva kancelarijska stolica sa lumbalnom podrskom za dugotrajan rad."
+            },
+            {
+                naziv: "Monitor 27\" UltraView QHD",
+                cena: 32499,
+                kategorija: "Monitor",
+                opis: "Veliki QHD monitor odlican za programiranje, dizajn i multitasking."
+            },
+            {
+                naziv: "Mehanicka tastatura NightType",
+                cena: 8990,
+                kategorija: "Tastatura",
+                opis: "Kompaktna tastatura sa pozadinskim osvetljenjem i brzim odzivom."
+            },
+            {
+                naziv: "Bezicni mis AirClick Pro",
+                cena: 5490,
+                kategorija: "Mis",
+                opis: "Precizan i lagan bezicni mis za produktivnost i svakodnevnu upotrebu."
+            },
+            {
+                naziv: "LED lampa ScreenLight",
+                cena: 4690,
+                kategorija: "Osvetljenje",
+                opis: "Lampa za sto koja smanjuje naprezanje ociju tokom vecernjeg rada."
+            },
+            {
+                naziv: "USB mikrofon VoiceCast",
+                cena: 11990,
+                kategorija: "Audio",
+                opis: "Mikrofon za online sastanke, streaming i snimanje sadrzaja."
+            },
+            {
+                naziv: "Podloga za sto DeskMat XL",
+                cena: 2490,
+                kategorija: "Dodaci",
+                opis: "Velika podloga za tastaturu i misa koja stiti sto i ulepsava setup."
+            },
+            {
+                naziv: "Stalak za laptop LiftStand",
+                cena: 3990,
+                kategorija: "Dodaci",
+                opis: "Metalni stalak koji podize laptop radi boljeg drzanja i hladjenja."
+            }
+        ];
+
+        const pretragaInput = document.getElementById("pretraga");
+        const sortiranjeSelect = document.getElementById("sortiranje");
+        const listaProizvoda = document.getElementById("listaProizvoda");
+        const infoRezultat = document.getElementById("infoRezultat");
+
+        function prikaziProizvode() {
+            const tekstPretrage = pretragaInput.value.toLowerCase().trim();
+            const nacinSortiranja = sortiranjeSelect.value;
+
+            let filtriraniProizvodi = proizvodi.filter((proizvod) => {
+                return (
+                    proizvod.naziv.toLowerCase().includes(tekstPretrage) ||
+                    proizvod.opis.toLowerCase().includes(tekstPretrage) ||
+                    proizvod.kategorija.toLowerCase().includes(tekstPretrage)
+                );
+            });
+
+            filtriraniProizvodi.sort((a, b) => {
+                if (nacinSortiranja === "cena-rastuce") {
+                    return a.cena - b.cena;
+                }
+
+                if (nacinSortiranja === "cena-opadajuce") {
+                    return b.cena - a.cena;
+                }
+
+                return 0;
+            });
+
+            listaProizvoda.innerHTML = "";
+
+            infoRezultat.textContent = "Broj prikazanih proizvoda: " + filtriraniProizvodi.length;
+
+            if (filtriraniProizvodi.length === 0) {
+                listaProizvoda.innerHTML = `
+                    <div class="nema-rezultata">
+                        Nema proizvoda koji odgovaraju unetoj pretrazi.
+                    </div>
+                `;
+                return;
+            }
+
+            filtriraniProizvodi.forEach((proizvod) => {
+                const kartica = document.createElement("div");
+                kartica.classList.add("kartica");
+
+                kartica.innerHTML = `
+                    <span class="kategorija">${proizvod.kategorija}</span>
+                    <h2>${proizvod.naziv}</h2>
+                    <p class="cena">${proizvod.cena.toLocaleString("sr-RS")} RSD</p>
+                    <p class="opis">${proizvod.opis}</p>
+                `;
+
+                listaProizvoda.appendChild(kartica);
+            });
+        }
+
+        pretragaInput.addEventListener("input", prikaziProizvode);
+        sortiranjeSelect.addEventListener("change", prikaziProizvode);
+
+        prikaziProizvode();
+    </script>
+</body>
+
+</html>

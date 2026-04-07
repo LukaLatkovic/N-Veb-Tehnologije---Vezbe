@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Luka Latkovic">
+    <title>Vezba 10-2 - Povezivanje validacija</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #1e293b;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            text-align: left;
+            font-weight: bold;
+            color: #334155;
+            margin-bottom: -8px;
+        }
+
+        input {
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        #greska {
+            color: #b91c1c;
+            background-color: #fee2e2;
+            border: 1px solid #fecaca;
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        #uspeh {
+            color: #166534;
+            background-color: #dcfce7;
+            border: 1px solid #86efac;
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Registracija korisnika</h1>
+
+        <form id="forma">
+            <label for="lozinka">Lozinka</label>
+            <input type="password" id="lozinka" placeholder="Unesite lozinku">
+
+            <label for="potvrda">Potvrda lozinke</label>
+            <input type="password" id="potvrda" placeholder="Ponovo unesite lozinku">
+
+            <button type="submit">Sacuvaj nalog</button>
+        </form>
+
+        <p id="greska"></p>
+        <p id="uspeh"></p>
+    </div>
+
+    <script>
+        const forma = document.getElementById("forma");
+        const lozinka = document.getElementById("lozinka");
+        const potvrda = document.getElementById("potvrda");
+        const greska = document.getElementById("greska");
+        const uspeh = document.getElementById("uspeh");
+
+        forma.addEventListener("submit", (e) => {
+            const vrednostLozinke = lozinka.value.trim();
+            const vrednostPotvrde = potvrda.value.trim();
+
+            greska.style.display = "none";
+            uspeh.style.display = "none";
+            greska.textContent = "";
+            uspeh.textContent = "";
+
+            if (vrednostLozinke === "" || vrednostPotvrde === "") {
+                e.preventDefault();
+                greska.textContent = "Oba polja moraju biti popunjena.";
+                greska.style.display = "block";
+                return;
+            }
+
+            if (vrednostLozinke.length < 8) {
+                e.preventDefault();
+                greska.textContent = "Lozinka mora imati najmanje 8 karaktera.";
+                greska.style.display = "block";
+                return;
+            }
+
+            if (vrednostLozinke !== vrednostPotvrde) {
+                e.preventDefault();
+                greska.textContent = "Lozinka i potvrda lozinke se ne poklapaju.";
+                greska.style.display = "block";
+                return;
+            }
+
+            e.preventDefault();
+            uspeh.textContent = "Lozinka je ispravno uneta i potvrdena.";
+            uspeh.style.display = "block";
+        });
+    </script>
+
+</body>
+
+</html>
