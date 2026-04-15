@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Luka Latkovic">
+    <title>Vezba 12-2 - Azuriranje podataka</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 40px 20px;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .opis {
+            text-align: center;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #334155;
+        }
+
+        input {
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            background-color: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        #poruka {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .uspeh {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .greska {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .rezultat {
+            margin-top: 20px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .rezultat h2 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        .rezultat p {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Azuriranje korisnika</h1>
+        <p class="opis">Izmenite podatke korisnika i posaljite PATCH zahtev ka REST API-ju.</p>
+
+        <form id="forma">
+            <label for="userId">ID korisnika</label>
+            <input type="number" id="userId" placeholder="Unesite ID korisnika" value="1">
+
+            <label for="ime">Novo ime</label>
+            <input type="text" id="ime" placeholder="Unesite novo ime">
+
+            <label for="email">Novi email</label>
+            <input type="email" id="email" placeholder="Unesite novi email">
+
+            <button type="submit">Azuriraj podatke</button>
+        </form>
+
+        <p id="poruka"></p>
+
+        <div class="rezultat" id="rezultat">
+            <h2>Podaci nakon azuriranja</h2>
+            <p><strong>ID:</strong> <span id="rezId">-</span></p>
+            <p><strong>Ime:</strong> <span id="rezIme">-</span></p>
+            <p><strong>Email:</strong> <span id="rezEmail">-</span></p>
+        </div>
+    </div>
+
+    <script>
+        const forma = document.getElementById("forma");
+        const userIdInput = document.getElementById("userId");
+        const imeInput = document.getElementById("ime");
+        const emailInput = document.getElementById("email");
+        const poruka = document.getElementById("poruka");
+
+        const rezId = document.getElementById("rezId");
+        const rezIme = document.getElementById("rezIme");
+        const rezEmail = document.getElementById("rezEmail");
+
+        forma.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const userId = userIdInput.value.trim();
+            const ime = imeInput.value.trim();
+            const email = emailInput.value.trim();
+
+            poruka.style.display = "none";
+            poruka.textContent = "";
+            poruka.className = "";
+
+            if (userId === "" || ime === "" || email === "") {
+                poruka.textContent = "Greska: sva polja moraju biti popunjena.";
+                poruka.className = "greska";
+                poruka.style.display = "block";
+                return;
+            }
+
+            if (!email.includes("@")) {
+                poruka.textContent = "Greska: email mora sadrzati znak @.";
+                poruka.className = "greska";
+                poruka.style.display = "block";
+                return;
+            }
+
+            const podaciZaAzuriranje = {
+                name: ime,
+                email: email
+            };
+
+            fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(podaciZaAzuriranje)
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Greska pri azuriranju. Status: " + response.status);
+                    }
+
+                    return response.json();
+                })
+                .then((data) => {
+                    poruka.textContent = "Uspeh! Podaci su azurirani.";
+                    poruka.className = "uspeh";
+                    poruka.style.display = "block";
+
+                    rezId.textContent = data.id;
+                    rezIme.textContent = data.name;
+                    rezEmail.textContent = data.email;
+
+                    forma.reset();
+                })
+                .catch((error) => {
+                    poruka.textContent = "Doslo je do greske: " + error.message;
+                    poruka.className = "greska";
+                    poruka.style.display = "block";
+                });
+        });
+    </script>
+
+</body>
+
+</html>

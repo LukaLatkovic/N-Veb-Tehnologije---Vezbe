@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Luka Latkovic">
+    <title>Domaci 11-2 - Filtriranje podataka</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 40px 20px;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .opis {
+            text-align: center;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+
+        .pretraga-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        #pretraga {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 14px;
+            font-size: 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        #pretraga:focus {
+            border-color: #2563eb;
+        }
+
+        #status {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            min-height: 24px;
+        }
+
+        .greska {
+            color: #b91c1c;
+        }
+
+        .uspeh {
+            color: #166534;
+        }
+
+        #listaZadataka {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 15px;
+        }
+
+        .zadatak {
+            background-color: white;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid #94a3b8;
+        }
+
+        .zadatak h2 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+
+        .zadatak p {
+            margin: 6px 0 0 0;
+            color: #475569;
+        }
+
+        .zavrsen {
+            border-left-color: #16a34a;
+            background-color: #f0fdf4;
+        }
+
+        .nezavrsen {
+            border-left-color: #dc2626;
+            background-color: #fef2f2;
+        }
+
+        .oznaka {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .oznaka-zavrsen {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .oznaka-nezavrsen {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .nema-rezultata {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            color: #64748b;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Lista zadataka</h1>
+        <p class="opis">Preuzimanje podataka sa REST API-ja i filtriranje</p>
+
+        <div class="pretraga-wrapper">
+            <input type="text" id="pretraga" placeholder="Pretrazi zadatke po naslovu...">
+        </div>
+
+        <p id="status">Ucitavanje zadataka...</p>
+        <ul id="listaZadataka"></ul>
+    </div>
+
+    <script>
+        const pretragaInput = document.getElementById("pretraga");
+        const listaZadataka = document.getElementById("listaZadataka");
+        const status = document.getElementById("status");
+
+        let sviZadaci = [];
+
+        fetch("https://jsonplaceholder.typicode.com/todos?_limit=20")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Greska pri preuzimanju podataka. Status: " + response.status);
+                }
+
+                return response.json();
+            })
+            .then((podaci) => {
+                sviZadaci = podaci;
+                status.textContent = "Zadaci su uspesno ucitani.";
+                status.className = "uspeh";
+                prikaziZadatke(sviZadaci);
+            })
+            .catch((error) => {
+                status.textContent = "Doslo je do greske: " + error.message;
+                status.className = "greska";
+            });
+
+        function prikaziZadatke(zadaci) {
+            listaZadataka.innerHTML = "";
+
+            if (zadaci.length === 0) {
+                listaZadataka.innerHTML = `
+                    <li class="nema-rezultata">Nema zadataka koji odgovaraju pretrazi.</li>
+                `;
+                return;
+            }
+
+            zadaci.forEach((zadatak) => {
+                const stavka = document.createElement("li");
+
+                stavka.className = zadatak.completed ? "zadatak zavrsen" : "zadatak nezavrsen";
+
+                stavka.innerHTML = `
+                    <h2>${zadatak.title}</h2>
+                    <p><strong>ID zadatka:</strong> ${zadatak.id}</p>
+                    <p><strong>Korisnik ID:</strong> ${zadatak.userId}</p>
+                    <span class="oznaka ${zadatak.completed ? "oznaka-zavrsen" : "oznaka-nezavrsen"}">
+                        ${zadatak.completed ? "Zavrsen" : "Nije zavrsen"}
+                    </span>
+                `;
+
+                listaZadataka.appendChild(stavka);
+            });
+        }
+
+        pretragaInput.addEventListener("input", () => {
+            const tekstPretrage = pretragaInput.value.toLowerCase().trim();
+
+            const filtriraniZadaci = sviZadaci.filter((zadatak) => {
+                return zadatak.title.toLowerCase().includes(tekstPretrage);
+            });
+
+            prikaziZadatke(filtriraniZadaci);
+        });
+    </script>
+
+</body>
+
+</html>

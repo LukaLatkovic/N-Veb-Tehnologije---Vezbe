@@ -1,0 +1,22 @@
+[
+    {
+        "naziv": "Laptop Lenovo IdeaPad",
+        "cena": "75999 RSD",
+        "opis": "Pouzdan laptop za rad, ucenje i svakodnevnu upotrebu."
+    },
+    {
+        "naziv": "Bezicni mis Logitech",
+        "cena": "2499 RSD",
+        "opis": "Ergonomski mis sa preciznim senzorom i dugim trajanjem baterije."
+    },
+    {
+        "naziv": "Monitor Samsung 24",
+        "cena": "18999 RSD",
+        "opis": "Full HD monitor pogodan za kancelarijski rad i multimediju."
+    },
+    {
+        "naziv": "Mehanicka tastatura Redragon",
+        "cena": "5499 RSD",
+        "opis": "Tastatura sa osvetljenjem i odlicnim odzivom za rad i gejming."
+    }
+]
