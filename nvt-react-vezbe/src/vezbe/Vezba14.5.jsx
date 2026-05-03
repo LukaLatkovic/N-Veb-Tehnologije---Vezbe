@@ -10,23 +10,43 @@ function Vezba5() {
   );
 
   return (
-    <div>
-      <h2>Vezba 14.5 - Filtriranje i pretraga liste</h2>
+    <section>
+      <h2 className="mb-4 text-2xl font-bold text-slate-900">
+        Vezba 14.5 - Filtriranje i pretraga liste
+      </h2>
 
-      <input
-        type="text"
-        placeholder="Pretrazi korisnike"
-        value={pretraga}
-        onChange={(e) => setPretraga(e.target.value)}
-        style={{ padding: '10px', width: '300px', marginBottom: '20px' }}
-      />
+      <div className="mb-5 max-w-xl bg-white p-5 shadow-sm">
+        <label className="mb-1 block font-medium text-slate-700">
+          Pretraga korisnika
+        </label>
 
-      <ul>
-        {filtriraniKorisnici.map((korisnik, index) => (
-          <li key={index}>{korisnik}</li>
-        ))}
-      </ul>
-    </div>
+        <input
+          type="text"
+          placeholder="Pretrazi korisnike"
+          value={pretraga}
+          onChange={(e) => setPretraga(e.target.value)}
+          className="w-full bg-slate-50 px-4 py-2 outline-none focus:bg-white focus:ring-2 focus:ring-emerald-700"
+        />
+
+        <p className="mt-3 text-sm text-slate-500">
+          Broj rezultata: {filtriraniKorisnici.length}
+        </p>
+      </div>
+
+      {filtriraniKorisnici.length === 0 ? (
+        <p className="bg-white p-4 text-slate-500 shadow-sm">
+          Nema korisnika koji odgovaraju pretrazi.
+        </p>
+      ) : (
+        <ul className="grid gap-3 md:grid-cols-2">
+          {filtriraniKorisnici.map((korisnik, index) => (
+            <li key={index} className="bg-white p-4 font-medium shadow-sm">
+              {korisnik}
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
   );
 }
 

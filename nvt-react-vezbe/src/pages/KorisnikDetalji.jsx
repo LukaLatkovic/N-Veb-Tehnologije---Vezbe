@@ -91,7 +91,7 @@ function KorisnikDetalji() {
 
                 <Link
                     to={`/korisnici/${korisnik.id}/izmeni`}
-                    className="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700"
+                    className="rounded-lg bg-emerald-700 px-4 py-2 font-medium text-white hover:bg-emerald-800"
                 >
                     Izmeni korisnika
                 </Link>

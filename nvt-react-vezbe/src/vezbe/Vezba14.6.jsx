@@ -28,35 +28,60 @@ function Vezba6() {
   };
 
   return (
-    <div>
-      <h2>Vezba 14.6 - Brisanje i uredjivanje stavki</h2>
+    <section>
+      <h2 className="mb-4 text-2xl font-bold text-slate-900">
+        Vezba 14.6 - Brisanje i uredjivanje stavki
+      </h2>
 
-      <ul>
+      <ul className="mb-6 space-y-3">
         {stavke.map((stavka, index) => (
-          <li key={index} style={{ marginBottom: '10px' }}>
-            {stavka}
-            <button onClick={() => obrisiStavku(index)} style={{ marginLeft: '10px' }}>
-              Obrisi
-            </button>
-            <button onClick={() => pokreniIzmenu(index)} style={{ marginLeft: '10px' }}>
-              Izmeni
-            </button>
+          <li
+            key={index}
+            className="flex flex-wrap items-center justify-between gap-3 bg-white p-4 shadow-sm"
+          >
+            <span className="font-medium text-slate-800">{stavka}</span>
+
+            <div className="flex gap-2">
+              <button
+                onClick={() => pokreniIzmenu(index)}
+                className="bg-amber-500 px-3 py-2 text-sm font-medium text-white hover:bg-amber-600"
+              >
+                Izmeni
+              </button>
+
+              <button
+                onClick={() => obrisiStavku(index)}
+                className="bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700"
+              >
+                Obrisi
+              </button>
+            </div>
           </li>
         ))}
       </ul>
 
       {indexZaIzmenu !== null && (
-        <div style={{ marginTop: '20px' }}>
+        <div className="max-w-xl bg-white p-5 shadow-sm">
+          <h3 className="mb-3 text-lg font-semibold text-slate-900">
+            Izmena stavke
+          </h3>
+
           <input
             type="text"
             value={novaVrednost}
             onChange={(e) => setNovaVrednost(e.target.value)}
-            style={{ padding: '10px', marginRight: '10px' }}
+            className="mb-3 w-full bg-slate-50 px-4 py-2 outline-none focus:bg-white focus:ring-2 focus:ring-emerald-700"
           />
-          <button onClick={sacuvajIzmenu}>Sacuvaj izmenu</button>
+
+          <button
+            onClick={sacuvajIzmenu}
+            className="bg-emerald-700 px-5 py-2 font-medium text-white hover:bg-emerald-800"
+          >
+            Sacuvaj izmenu
+          </button>
         </div>
       )}
-    </div>
+    </section>
   );
 }
 

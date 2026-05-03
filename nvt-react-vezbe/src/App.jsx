@@ -38,8 +38,8 @@ function Vezbe14() {
             key={dugme.id}
             onClick={() => setAktivna(dugme.id)}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition ${aktivna === dugme.id
-                ? 'bg-blue-600 text-white'
-                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              ? 'bg-emerald-700 text-white'
+              : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
               }`}
           >
             {dugme.label}
@@ -62,7 +62,7 @@ function Vezbe14() {
 function App() {
   const linkClass = ({ isActive }) =>
     `rounded-lg px-4 py-2 text-sm font-medium transition ${isActive
-      ? 'bg-blue-600 text-white'
+      ? 'bg-emerald-700 text-white'
       : 'text-slate-700 hover:bg-slate-100'
     }`;
 

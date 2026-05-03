@@ -15,33 +15,46 @@ function Vezba2() {
     }
   };
 
-  return (
-    <div>
-      <h2>Vezba 14.2 - Kontrolisana forma</h2>
+  const jeGreska = poruka.includes('Molimo');
 
-      <form onSubmit={obradiFormu}>
+  return (
+    <section>
+      <h2 className="mb-4 text-2xl font-bold text-slate-900">
+        Vezba 14.2 - Kontrolisana forma
+      </h2>
+
+      <form onSubmit={obradiFormu} className="bg-white p-5 shadow-sm">
+        <label className="mb-1 block font-medium text-slate-700">
+          Ime
+        </label>
+
         <input
           type="text"
           placeholder="Unesite ime"
           value={ime}
           onChange={(e) => setIme(e.target.value)}
-          style={{
-            padding: '10px',
-            fontSize: '16px',
-            width: '300px',
-            marginBottom: '10px'
-          }}
+          className="mb-4 w-full max-w-md bg-slate-50 px-4 py-2 outline-none focus:bg-white focus:ring-2 focus:ring-emerald-700"
         />
-        <br />
-        <button type="submit">Posalji</button>
+
+        <button
+          type="submit"
+          className="bg-emerald-700 px-5 py-2 font-medium text-white hover:bg-emerald-800"
+        >
+          Posalji
+        </button>
       </form>
 
       {poruka && (
-        <p style={{ marginTop: '20px', color: 'green' }}>
+        <p
+          className={`mt-4 p-4 font-medium ${jeGreska
+            ? 'bg-red-50 text-red-700'
+            : 'bg-green-50 text-green-700'
+            }`}
+        >
           {poruka}
         </p>
       )}
-    </div>
+    </section>
   );
 }
 

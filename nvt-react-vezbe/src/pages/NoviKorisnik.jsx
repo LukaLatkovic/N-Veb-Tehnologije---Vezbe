@@ -74,7 +74,7 @@ function NoviKorisnik() {
                         placeholder="Unesite ime"
                         value={ime}
                         onChange={(e) => setIme(e.target.value)}
-                        className="w-full rounded-lg border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+                        className="w-full rounded-lg border border-slate-300 px-4 py-2 outline-none focus:border-emerald-700"
                     />
                 </div>
 
@@ -85,14 +85,14 @@ function NoviKorisnik() {
                         placeholder="Unesite email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full rounded-lg border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+                        className="w-full rounded-lg border border-slate-300 px-4 py-2 outline-none focus:border-emerald-700"
                     />
                 </div>
 
                 <button
                     type="submit"
                     disabled={loading}
-                    className="rounded-lg bg-blue-600 px-5 py-2 font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
+                    className="rounded-lg bg-emerald-700 px-5 py-2 font-medium text-white hover:bg-emerald-800 disabled:cursor-not-allowed disabled:bg-emerald-300"
                 >
                     {loading ? 'Slanje...' : 'Sacuvaj korisnika'}
                 </button>

@@ -30,44 +30,69 @@ function Vezba3() {
     setLozinka('');
   };
 
+  const uspesno = poruka.includes('Uspesna');
+
   return (
-    <div>
-      <h2>Vezba 14.3 - Validacija vise polja</h2>
+    <section>
+      <h2 className="mb-4 text-2xl font-bold text-slate-900">
+        Vezba 14.3 - Validacija vise polja
+      </h2>
 
-      <form onSubmit={obradiFormu}>
-        <input
-          type="text"
-          placeholder="Ime"
-          value={ime}
-          onChange={(e) => setIme(e.target.value)}
-          style={{ display: 'block', marginBottom: '10px', padding: '10px', width: '300px' }}
-        />
+      <form onSubmit={obradiFormu} className="max-w-xl bg-white p-5 shadow-sm">
+        <div className="mb-4">
+          <label className="mb-1 block font-medium text-slate-700">Ime</label>
+          <input
+            type="text"
+            placeholder="Ime"
+            value={ime}
+            onChange={(e) => setIme(e.target.value)}
+            className="w-full bg-slate-50 px-4 py-2 outline-none focus:bg-white focus:ring-2 focus:ring-emerald-700"
+          />
+        </div>
 
-        <input
-          type="text"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={{ display: 'block', marginBottom: '10px', padding: '10px', width: '300px' }}
-        />
+        <div className="mb-4">
+          <label className="mb-1 block font-medium text-slate-700">Email</label>
+          <input
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full bg-slate-50 px-4 py-2 outline-none focus:bg-white focus:ring-2 focus:ring-emerald-700"
+          />
+        </div>
 
-        <input
-          type="password"
-          placeholder="Lozinka"
-          value={lozinka}
-          onChange={(e) => setLozinka(e.target.value)}
-          style={{ display: 'block', marginBottom: '10px', padding: '10px', width: '300px' }}
-        />
+        <div className="mb-4">
+          <label className="mb-1 block font-medium text-slate-700">
+            Lozinka
+          </label>
+          <input
+            type="password"
+            placeholder="Lozinka"
+            value={lozinka}
+            onChange={(e) => setLozinka(e.target.value)}
+            className="w-full bg-slate-50 px-4 py-2 outline-none focus:bg-white focus:ring-2 focus:ring-emerald-700"
+          />
+        </div>
 
-        <button type="submit">Registruj se</button>
+        <button
+          type="submit"
+          className="bg-emerald-700 px-5 py-2 font-medium text-white hover:bg-emerald-800"
+        >
+          Registruj se
+        </button>
       </form>
 
       {poruka && (
-        <p style={{ marginTop: '20px', color: poruka.includes('Uspesna') ? 'green' : 'red' }}>
+        <p
+          className={`mt-4 p-4 font-medium ${uspesno
+            ? 'bg-green-50 text-green-700'
+            : 'bg-red-50 text-red-700'
+            }`}
+        >
           {poruka}
         </p>
       )}
-    </div>
+    </section>
   );
 }
 
