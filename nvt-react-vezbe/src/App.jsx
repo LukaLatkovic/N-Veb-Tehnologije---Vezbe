@@ -71,10 +71,10 @@ function App() {
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-6xl px-6 py-5">
           <h1 className="text-3xl font-bold text-slate-900">
-            React vezbe - API aplikacija
+            React vezbe
           </h1>
           <p className="mt-1 text-slate-500">
-            Vezbe 14, 15 i 16 iz predmeta Napredne web tehnologije
+            Vezbe iz predmeta Napredne web tehnologije
           </p>
 
           <nav className="mt-5 flex flex-wrap gap-2">
