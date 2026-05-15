@@ -1,0 +1,95 @@
+<section class="max-w-2xl">
+    <div class="mb-8 flex items-center gap-4">
+        <div class="h-px flex-1 bg-slate-300"></div>
+
+        <span class="text-sm font-medium uppercase tracking-[0.2em] text-slate-500">
+            Registracija
+        </span>
+
+        <div class="h-px flex-1 bg-slate-300"></div>
+    </div>
+
+    <h2 class="text-2xl font-semibold tracking-tight text-slate-950">
+        Podaci korisnika
+    </h2>
+
+    <p class="mt-3 leading-7 text-slate-600">
+        Popunite osnovne podatke. Vrednosti se prikazuju u realnom vremenu pomoću
+        dvosmernog povezivanja podataka.
+    </p>
+
+    <form class="mt-8 space-y-6" (ngSubmit)="posaljiFormu()">
+        <div>
+            <label for="ime" class="mb-2 block text-sm font-medium text-slate-700">
+                Ime <span class="text-red-600">*</span>
+            </label>
+
+            <input id="ime" type="text" name="ime" [(ngModel)]="korisnik.ime" placeholder="Unesite ime"
+                class="w-full border-0 border-b border-slate-300 bg-transparent px-0 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-emerald-700" />
+        </div>
+
+        <div>
+            <label for="prezime" class="mb-2 block text-sm font-medium text-slate-700">
+                Prezime <span class="text-red-600">*</span>
+            </label>
+
+            <input id="prezime" type="text" name="prezime" [(ngModel)]="korisnik.prezime" placeholder="Unesite prezime"
+                class="w-full border-0 border-b border-slate-300 bg-transparent px-0 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-emerald-700" />
+        </div>
+
+        <div>
+            <label for="email" class="mb-2 block text-sm font-medium text-slate-700">
+                Email <span class="text-red-600">*</span>
+            </label>
+
+            <input id="email" type="email" name="email" [(ngModel)]="korisnik.email"
+                placeholder="ime.prezime@example.com"
+                class="w-full border-0 border-b border-slate-300 bg-transparent px-0 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-emerald-700" />
+        </div>
+
+        <div class="flex flex-wrap items-center gap-4 pt-4">
+            <button type="submit" [disabled]="!formaValidna() || obrada"
+                class="bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500">
+                {{ obrada ? 'Slanje...' : 'Pošalji' }}
+            </button>
+
+            <button type="button" (click)="resetujFormu()"
+                class="px-2 py-3 text-sm font-semibold text-slate-600 transition hover:text-emerald-700">
+                Resetuj
+            </button>
+
+            <p class="text-sm text-slate-500">
+                <span class="text-red-600">*</span> obavezna polja
+            </p>
+        </div>
+    </form>
+
+    <div class="mt-12">
+        <p class="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-slate-500">
+            Pregled unosa
+        </p>
+
+        <dl class="space-y-3 text-slate-700">
+            <div class="grid gap-1 sm:grid-cols-[120px_1fr]">
+                <dt class="font-medium text-slate-950">Ime</dt>
+                <dd>{{ korisnik.ime || 'Nije uneto' }}</dd>
+            </div>
+
+            <div class="grid gap-1 sm:grid-cols-[120px_1fr]">
+                <dt class="font-medium text-slate-950">Prezime</dt>
+                <dd>{{ korisnik.prezime || 'Nije uneto' }}</dd>
+            </div>
+
+            <div class="grid gap-1 sm:grid-cols-[120px_1fr]">
+                <dt class="font-medium text-slate-950">Email</dt>
+                <dd>{{ korisnik.email || 'Nije unet' }}</dd>
+            </div>
+        </dl>
+
+        @if (poruka) {
+        <p class="mt-6 font-medium text-emerald-700">
+            {{ poruka }}
+        </p>
+        }
+    </div>
+</section>
