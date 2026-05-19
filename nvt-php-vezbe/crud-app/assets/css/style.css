@@ -1,0 +1,65 @@
+/* assets/css/style.css */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f9;
+        margin: 20px;
+    }
+    h1 {
+        color: #660000; /* тамноцрвена */
+		font-family: Arial, sans-serif;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+		font-family: Arial, sans-serif;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+		font-family: Arial, sans-serif;
+    }
+    th {
+        background-color: #990000; /* тамноцрвена позадина */
+        color: white;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    a {
+        text-decoration: none;
+        color: #990000; /* тамноцрвена за линкове */
+		font-family: Arial, sans-serif;
+    }
+    a:hover {
+        text-decoration: underline;
+        color: #660000; /* још тамнија нијанса при hover-у */
+    }
+    form {
+        background: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        max-width: 400px;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+    input, button {
+        padding: 8px;
+        margin-top: 5px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    button {
+        background-color: #990000; /* тамноцрвено дугме */
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #660000; /* још тамнија нијанса при hover-у */
+    }
