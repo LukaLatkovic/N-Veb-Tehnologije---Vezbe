@@ -12,4 +12,9 @@ class Student extends Model
         'email',
         'index_number',
     ];
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class);
+    }
 }

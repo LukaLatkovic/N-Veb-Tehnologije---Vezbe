@@ -107,13 +107,20 @@
             font-weight: bold;
         }
 
-        input {
+        input,
+        textarea {
             display: block;
             width: 100%;
             padding: 9px;
             margin-top: 6px;
             box-sizing: border-box;
             border: 1px solid #ccc;
+            font-family: Arial, sans-serif;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
         }
 
         .actions {

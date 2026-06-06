@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Models\Course;
 
 class StudentController extends Controller
 {
@@ -37,6 +38,8 @@ class StudentController extends Controller
 
     public function show(Student $student)
     {
+        $student->load('courses');
+
         return view('students.show', compact('student'));
     }
 
@@ -68,5 +71,28 @@ class StudentController extends Controller
         return redirect()
             ->route('students.index')
             ->with('success', 'Student je uspešno obrisan.');
+    }
+
+    public function enrollForm(Student $student)
+    {
+        $courses = Course::orderBy('name')->get();
+
+        $student->load('courses');
+
+        return view('students.enroll', compact('student', 'courses'));
+    }
+
+    public function enroll(Request $request, Student $student)
+    {
+        $validated = $request->validate([
+            'courses' => ['nullable', 'array'],
+            'courses.*' => ['exists:courses,id'],
+        ]);
+
+        $student->courses()->sync($validated['courses'] ?? []);
+
+        return redirect()
+            ->route('students.show', $student)
+            ->with('success', 'Upis studenta na kurseve je uspešno ažuriran.');
     }
 }

@@ -24,4 +24,36 @@
             Izmeni studenta
         </a>
     </p>
+
+    <h2>Kursevi na koje je student upisan</h2>
+
+    @if ($student->courses->isEmpty())
+        <p>Student trenutno nije upisan ni na jedan kurs.</p>
+    @else
+        <table>
+            <thead>
+                <tr>
+                    <th>Naziv kursa</th>
+                    <th>Oznaka</th>
+                    <th>Opis</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach ($student->courses as $course)
+                    <tr>
+                        <td>{{ $course->name }}</td>
+                        <td>{{ $course->code }}</td>
+                        <td>{{ $course->description ?: '-' }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+
+    <p>
+        <a class="button" href="{{ route('students.enrollForm', $student) }}">
+            Uredi upis na kurseve
+        </a>
+    </p>
 @endsection

@@ -48,6 +48,7 @@
                             <div class="actions">
                                 <a href="{{ route('students.show', $student) }}">Prikaži</a>
                                 <a href="{{ route('students.edit', $student) }}">Izmeni</a>
+                                <a href="{{ route('students.enrollForm', $student) }}">Upis na kurseve</a>
 
                                 <form
                                     class="inline-form"
