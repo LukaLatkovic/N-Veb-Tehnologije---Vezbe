@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>Vežba 25.3 - Generator kviza</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <main class="page">
+        <section class="hero">
+
+            <h1>Vežba 25.3 — Generator kviza</h1>
+
+            <p class="description">
+                Unesite temu, a aplikacija će generisati pitanja za kviz sa ponuđenim odgovorima.
+            </p>
+        </section>
+
+        <section class="form-section">
+            <form id="quizForm">
+                <label for="topic">
+                    Tema kviza
+                </label>
+
+                <input
+                    type="text"
+                    id="topic"
+                    name="topic"
+                    placeholder="Na primer: veštačka inteligencija, istorija, sport..."
+                    required
+                >
+
+                <button type="submit">
+                    Generiši kviz
+                </button>
+            </form>
+        </section>
+
+        <section class="result-section">
+            <h2>Rezultat</h2>
+
+            <pre id="result">Kviz će biti prikazan ovde.</pre>
+        </section>
+    </main>
+
+    <script>
+        const form = document.getElementById("quizForm");
+        const result = document.getElementById("result");
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const topic = document.getElementById("topic").value.trim();
+
+            if (!topic) {
+                result.innerText = "Unesite temu za kviz.";
+                return;
+            }
+
+            result.innerText = "Generisanje kviza je u toku...";
+
+            try {
+                const response = await fetch("/generate-quiz", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        topic: topic
+                    })
+                });
+
+                const data = await response.json();
+
+                result.innerText = data.quiz;
+            } catch (error) {
+                console.error(error);
+                result.innerText = "Došlo je do greške prilikom generisanja kviza.";
+            }
+        });
+    </script>
+</body>
+</html>

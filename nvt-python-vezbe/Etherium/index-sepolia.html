@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vežba 26.1 - ERC-20 Token Info Sepolia</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+
+    <style>
+        body {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .field {
+            margin-bottom: 16px;
+        }
+
+        input {
+            width: 100%;
+        }
+
+        .result {
+            margin-top: 24px;
+            padding: 16px;
+            background: #f4f6f9;
+            border-left: 4px solid #990000;
+        }
+
+        .error {
+            color: #b91c1c;
+            font-weight: bold;
+        }
+
+        .success {
+            color: #166534;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Vežba 26.1 — ERC-20 Token Info</h1>
+
+    <p>
+        Unesite adresu ERC-20 tokena na Ethereum Sepolia testnoj mreži.
+        Aplikacija prikazuje osnovne informacije o tokenu i stanje tokena za unetu wallet adresu.
+    </p>
+
+    <div class="field">
+        <label for="tokenAddress">Adresa tokena:</label>
+        <input type="text" id="tokenAddress" placeholder="Unesite ERC-20 adresu tokena na Sepolia mreži">
+    </div>
+
+    <div class="field">
+        <label for="walletAddress">Adresa wallet-a:</label>
+        <input type="text" id="walletAddress" placeholder="Unesite Ethereum wallet adresu">
+    </div>
+
+    <button id="showButton">Prikaži informacije</button>
+
+    <p id="status"></p>
+
+    <section class="result">
+        <h2>Informacije o tokenu</h2>
+
+        <ul>
+            <li><strong>Ime:</strong> <span id="tokenName">-</span></li>
+            <li><strong>Simbol:</strong> <span id="tokenSymbol">-</span></li>
+            <li><strong>Decimale:</strong> <span id="tokenDecimals">-</span></li>
+            <li><strong>Ukupna količina:</strong> <span id="tokenSupply">-</span></li>
+            <li><strong>Balans korisnika:</strong> <span id="userBalance">-</span></li>
+        </ul>
+    </section>
+
+    <script src="script1.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>Vežba 25.2 - Opis slike</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+
+    <style>
+        body {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        img {
+            display: block;
+            margin-top: 20px;
+            max-width: 420px;
+            border-radius: 8px;
+        }
+
+        .result {
+            margin-top: 24px;
+            padding: 16px;
+            background: #f4f6f9;
+            border-left: 4px solid #990000;
+        }
+
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vežba 25.2 — Klasifikacija i opis slike</h1>
+
+    <p>
+        Otpremite sliku. Aplikacija prvo klasifikuje sliku pomoću MobileNet modela,
+        a zatim generiše kratak opis pomoću Flask backend-a.
+    </p>
+
+    <label for="upload">Izaberite sliku:</label>
+    <input type="file" id="upload" accept="image/*">
+
+    <img id="preview" alt="Pregled slike" style="display: none;">
+
+    <div class="result">
+        <h3>Klasifikacija</h3>
+        <p id="classification">Još uvek nije izabrana slika.</p>
+    </div>
+
+    <div class="result">
+        <h3>Generisani opis</h3>
+        <p id="description">Opis će biti prikazan ovde.</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
